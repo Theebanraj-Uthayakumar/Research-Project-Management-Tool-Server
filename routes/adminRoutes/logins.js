@@ -1,11 +1,10 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = require("express").Router();
-
-let Login = require("./../../models/adminModels/Login");
+const Login = require("./../../models/adminModels/Login");
 
 //add staff member
-router.route("/add").post(async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     const userID = req.body.userID;
     const password = await bcrypt.hash(req.body.password, 10);
@@ -26,8 +25,8 @@ router.route("/add").post(async (req, res) => {
   }
 });
 
-//get all  logins
-router.route("/login").get((req, res) => {
+//get all registerd users
+router.get("/login", (req, res) => {
   Login.find()
     .then((logins) => {
       res.json(logins);
@@ -39,20 +38,7 @@ router.route("/login").get((req, res) => {
 });
 
 //delete login member
-router.route("/delete/:id").delete(async (req, res) => {
-  let id = req.params.id;
-
-  await Login.findByIdAndDelete(id)
-    .then(() => {
-      res.status(204).send({ status: "Login Deleted", id: id });
-    })
-    .catch((err) => {
-      res.status(500).send({ status: "Error while deleting record!!" });
-    });
-});
-
-//delete login member
-router.route("/deleteByUserID/:userID").delete(async (req, res) => {
+router.delete("/deleteByUserID/:userID", async (req, res) => {
   let userID = req.params.userID;
 
   await Login.remove({ userID: userID })
@@ -75,8 +61,6 @@ router.post("/login", async (req, res) => {
         // Resolve your query here
         return res.json({ status: "no_user", user: false });
       } else {
-        console.log(result);
-
         const isPasswordValid = await bcrypt.compare(
           req.body.password,
           result.password
@@ -103,6 +87,35 @@ router.post("/login", async (req, res) => {
       }
     }
   );
+});
+
+//filter users by role
+router.get("/Filter", async (req, res) => {
+  try {
+    const users = await Login.find({ role: req.query.role });
+    res.status(200).json(users);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+//Update users
+router.patch("/updateByUserID/:userId", async (req, res) => {
+  try {
+    const updateUsers = await Login.updateOne(
+      { _id: req.params.userId },
+      {
+        $set: {
+          userID: req.body.userID,
+          password: await bcrypt.hash(req.body.password, 10),
+          role: req.body.role,
+        },
+      }
+    );
+    res.json(updateUsers);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
 module.exports = router;
