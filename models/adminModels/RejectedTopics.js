@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema;//Store the details about rejected topics
 const RejectedTopicSchema = new Schema({
   studentId: {
     type: String,
