@@ -21,7 +21,7 @@ const StudentSchema = new Schema({
   },
 
   password: {
-    type: String,
+    type: String,   
     // require: true,
   },
   role: {
