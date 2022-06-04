@@ -49,7 +49,7 @@ router.route("/").get((req, res) => {
     });
 });
 
-//update research details
+//update research details by getting the research ID
 router.route("/update/:id").put(upload.single("document"), async (req, res) => {
   try {
     let oldResearch = await Research.findById(req.params.id);
