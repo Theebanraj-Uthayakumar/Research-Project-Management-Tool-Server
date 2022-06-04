@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose");//Store the details about Accepted Topics
 
 const AcceptedTopicSchema = new mongoose.Schema({
   studentId: {
