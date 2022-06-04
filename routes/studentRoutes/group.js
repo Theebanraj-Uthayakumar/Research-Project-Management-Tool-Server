@@ -1,19 +1,15 @@
 const router = require("express").Router();
-let Group = require("./../../models/studentModels/Group");
+let Group = require("../../models/StudentModels/Group");
 
 //adding group details
-router.route("/add").post((req, res) => {
-  const leader = req.body.leader;
-  const member1 = req.body.member1;
-  const member2 = req.body.member2;
-  const member3 = req.body.member3;
-
-  const newGroup = new Group({
-    leader,
-    member1,
-    member2,
-    member3,
+router.post("/add", async (req, res) => {
+  const groupExist = await Group.findOne({
+    studentID: req.body.studentID,
   });
+  if (groupExist)
+    return res.status(400).json({ error_Message: "Group already exists" });
+
+  const newGroup = await new Group(req.body);
 
   newGroup
     .save()
@@ -26,7 +22,7 @@ router.route("/add").post((req, res) => {
 });
 
 //get all group details
-router.route("/").get((req, res) => {
+router.get("/", async (req, res) => {
   Group.find()
     .then((group) => {
       res.json(group);
@@ -34,6 +30,16 @@ router.route("/").get((req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+//get All group By Student ID
+router.get("/FilterGroup", async (req, res) => {
+  try {
+    const groups = await Group.find({ studentID: req.query.studentID });
+    res.status(200).json(groups);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
 //update group details

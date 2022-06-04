@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const GroupSchema = new Schema({
+  studentID: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   leader: {
     type: String,
     required: true,

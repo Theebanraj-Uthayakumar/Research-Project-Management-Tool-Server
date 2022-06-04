@@ -2,8 +2,7 @@ const router = require("express").Router();
 const multer = require("multer");
 const cloudinary = require("../../utils/cloudinary");
 const upload = require("../../utils/multer");
-
-let Research = require("./../../models/studentModels/Research.js");
+let Research = require("../../models/StudentModels/Research.js");
 
 // add research details
 router.route("/add").post(upload.single("document"), async (req, res) => {

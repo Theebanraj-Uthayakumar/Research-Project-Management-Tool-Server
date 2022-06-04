@@ -15,15 +15,15 @@ app.get("/", (req, res) => {
   res.send("Research-Project-Management-Tool-Server");
 });
 
-const TopicRouter = require("./routes/adminRoutes/topics");
-const AcceptRouter = require("./routes/adminRoutes/accepted");
-const RejectRouter = require("./routes/adminRoutes/rejected");
-const StudentRouter = require("./routes/adminRoutes/student");
-const StaffRouter = require("./routes/adminRoutes/staff");
-const templateRouter = require("./routes/adminRoutes/template");
-const LoginRouter = require("./routes/adminRoutes/logins");
-const ResearchRouter = require("./routes/studentRoutes/research");
-const GroupRouter = require("./routes/studentRoutes/group");
+const TopicRouter = require("./routes/AdminRoutes/topics");
+const AcceptRouter = require("./routes/AdminRoutes/accepted");
+const RejectRouter = require("./routes/AdminRoutes/rejected");
+const StudentRouter = require("./routes/AdminRoutes/student");
+const StaffRouter = require("./routes/AdminRoutes/staff");
+const templateRouter = require("./routes/AdminRoutes/template");
+const LoginRouter = require("./routes/AdminRoutes/logins");
+const ResearchRouter = require("./routes/StudentRoutes/research");
+const GroupRouter = require("./routes/StudentRoutes/group");
 
 app.use("/rpmt/topics", TopicRouter);
 app.use("/rpmt/acceptedTopics", AcceptRouter);

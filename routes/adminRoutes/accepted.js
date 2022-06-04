@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const { Router } = require("express");
 //import model
-let AcceptedTopics = require("./../../models/adminModels/AcceptedTopics.js");
+let AcceptedTopics = require("../../models/AdminModels/AcceptedTopics.js");
 
 router.route("/add").post(async (req, res) => {
   const studentId = req.body.studentId;

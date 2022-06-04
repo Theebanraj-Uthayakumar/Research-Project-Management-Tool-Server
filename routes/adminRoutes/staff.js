@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-let Staff = require("./../../models/adminModels/Staff");
+let Staff = require("../../models/AdminModels/Staff");
 
 //add staff member
 router.route("/registerStaffMember").post((req, res) => {

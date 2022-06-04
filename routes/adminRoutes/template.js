@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const multer = require("multer");
-let Template = require("./../../models/adminModels/Templates");
+let Template = require("../../models/AdminModels/Templates");
 
 const cloudinary = require("../../utils/cloudinary");
 

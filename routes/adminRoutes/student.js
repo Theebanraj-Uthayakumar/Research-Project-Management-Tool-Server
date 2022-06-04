@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-let Student = require("./../../models/adminModels/Student.js");
+let Student = require("../../models/AdminModels/Student.js");
 
 //Student Registration
 router.route("/registerStudent").post((req, res) => {
